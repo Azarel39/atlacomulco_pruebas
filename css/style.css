@@ -1,21 +1,50 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@media screen and (max-width: 1024px) {
+    body {
+        background-color: #f0f0f0;
+    }
+    .container {
+        width: 90%;
+        margin: auto;
+    }
 }
 
+@media screen and (max-width: 767px) {
+    body {
+        background-color: #e0e0e0;
+    }
+    .container {
+        width: 95%;
+    }
+    .menu {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        background-color: #d0d0d0;
+    }
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+    .menu {
+        display: none; 
+    }
+}
+
+
+
 body {
-    font-family: Montserrat, "Helvetica Neue";
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    font-family: Montserrat, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 header {
     background: rgb(120, 0, 30);
     color: white;
-    padding: 2rem;
-    text-align: center;
+    padding: 4rem;
 }
 
 nav ul {
@@ -38,11 +67,11 @@ nav ul li a {
 .main-content {
     display: flex;
     flex: 1;
-    padding: 4rem;
+    padding: 1rem;
 }
 
 section {
-    flex: 2;
+    flex: 1;
     padding: 4rem;
     background: #f4f4f4;
 }
@@ -50,27 +79,43 @@ section {
 aside {
     flex: 1;
     padding: 4rem;
-    background: #ddd;
+    background: #f4f4f4;
 }
 
 footer {
     background: rgb(120, 0, 30);
     color: white;
     text-align: center;
-    padding: 4rem;
+    padding: 2rem;
     margin-top: auto;
 }
-
-
-
-.footer-main {
+.footer-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 20px;
+}
+.contacto-info {
+    flex: 1;
+    min-width: 20px;
+    text-align: left;
 }
 
-img {
-    border: 24px;
-    height: 150px;
-    width: 124px;
+.footer-bottom {
+    flex: 1;
+    background-color: rgb(91, 0, 23);
+    padding: 10px;
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .contact-info {
+        text-align: center;
+    }
 }
