@@ -1,6 +1,18 @@
+:root
+{
+    /*CUSTOMS PROPIETERIS*/
+    --blanco: #ffffff; 
+    --obscuro: #212121;
+    --primario: #ffc107;
+    --secundario: #0097a7;
+    --gris: #757575;
+    --gobierno: #9D2449;
+    --mor:#AF272F;
+}
+
 @media screen and (max-width: 1024px) {
     body {
-        background-color: #f0f0f0;
+        background-color: var(--blanco);
     }
     .container {
         width: 90%;
@@ -10,7 +22,7 @@
 
 @media screen and (max-width: 767px) {
     body {
-        background-color: #e0e0e0;
+        background-color: var(--blanco);
     }
     .container {
         width: 95%;
@@ -22,10 +34,10 @@
 
 @media screen and (max-width: 480px) {
     body {
-        background-color: #d0d0d0;
+        background-color: var(--blanco);
     }
     .container {
-        width: 100%;
+        max-width: 100%;
         padding: 10px;
     }
     .menu {
@@ -42,16 +54,16 @@ body {
 }
 
 header {
-    background: rgb(120, 0, 30);
+    background: var(--mor);
     color: white;
-    padding: 4rem;
+    padding: 2rem;
 }
 
 nav ul {
     display: flex;
     justify-content: center;
-    background: rgb(120, 0, 30);
-    padding: 4rem;
+    background: var(--mor);
+    padding: 2rem;
     list-style: none;
 }
 
@@ -83,7 +95,8 @@ aside {
 }
 
 footer {
-    background: rgb(120, 0, 30);
+    position: relative;
+    background: var(--mor);
     color: white;
     text-align: center;
     padding: 2rem;
@@ -104,9 +117,53 @@ footer {
 
 .footer-bottom {
     flex: 1;
-    background-color: rgb(91, 0, 23);
+    background-color: var(--mor);
     padding: 10px;
     margin-top: 20px;
+}
+
+footer .icon-redes{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    text-align: center;
+    flex-wrap: wrap;
+}
+footer .icon-redes li {
+    list-style: none;
+}
+
+footer .icon-redes li a {
+    font-size: 6rem;
+    color: var(--blanco);
+    margin: 0 10px;
+    display: inline-block;
+    transition: 0.5s;
+}
+
+footer .icon-redes li a:hover{
+    transform: translateY(-10px);
+}
+
+.wave-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+.wave {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    animation: waveAnimation 6s infinite linear;
+}
+
+@keyframes waveAnimation {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
 @media screen and (max-width: 768px) {
