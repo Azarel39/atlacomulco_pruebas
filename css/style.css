@@ -99,9 +99,11 @@ footer {
     background: var(--mor);
     color: white;
     text-align: center;
-    padding: 2rem;
+    padding: 4rem 5rem 6rem;
     margin-top: auto;
 }
+
+
 .footer-container {
     display: flex;
     flex-wrap: wrap;
@@ -147,24 +149,41 @@ footer .icon-redes li a:hover{
 }
 
 .wave-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-}
-.wave {
     position: absolute;
-    bottom: 100%;
+    top: -1px; /* Para evitar espacios visibles */
     left: 0;
     width: 100%;
     height: 100px;
-    animation: waveAnimation 6s infinite linear;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.wave-container svg {
+    display: block;
+    width: 200%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    fill: var(--mor); /* Igual al fondo del footer */
+    animation: waveAnimation 6s linear infinite;
 }
 
 @keyframes waveAnimation {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
+
+footer {
+    position: relative; /* Para que la ola se posicione sobre él */
+    
+    
+    text-align: center;
+    padding: 4rem 2rem 4rem; /* Ajustado para que la ola no lo tape */
+    margin-top: 1rem; /* Espacio para que la ola quede sobre el footer */
+}
+
+
 
 @media screen and (max-width: 768px) {
     .footer-container {
