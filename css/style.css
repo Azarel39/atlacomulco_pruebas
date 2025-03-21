@@ -1,6 +1,5 @@
 :root
 {
-    /*CUSTOMS PROPIETERIS*/
     --blanco: #ffffff; 
     --obscuro: #212121;
     --primario: #ffc107;
@@ -165,7 +164,7 @@ footer .icon-redes li a:hover{
     position: absolute;
     top: 0;
     left: 0;
-    fill: var(--mor); 
+    fill: var(--mor); /* Se asegura de que la ola sea del color del footer */
     animation: waveAnimation 6s linear infinite;
 }
 
@@ -173,6 +172,7 @@ footer .icon-redes li a:hover{
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
+
 
 footer {
     position: relative;
