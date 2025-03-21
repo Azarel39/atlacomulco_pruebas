@@ -165,7 +165,7 @@ footer .icon-redes li a:hover{
     top: 0;
     left: 0;
     fill: var(--mor);
-    animation: waveAnimation 6s linear infinite;
+    animation: waveAnimation 8s linear infinite;
 }
 
 @keyframes waveAnimation {
@@ -180,9 +180,8 @@ footer {
     color: white;
     text-align: center;
     padding: 6rem 5rem 6rem;
-    margin-top: 50px; 
+    margin-top: 4rem; 
 }
-
 
 
 @media screen and (max-width: 768px) {
