@@ -164,7 +164,7 @@ footer .icon-redes li a:hover{
     position: absolute;
     top: 0;
     left: 0;
-    fill: var(--mor); /* Se asegura de que la ola sea del color del footer */
+    fill: var(--mor);
     animation: waveAnimation 6s linear infinite;
 }
 
