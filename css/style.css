@@ -194,3 +194,71 @@ footer {
         text-align: center;
     }
 }
+
+/* ------------------------------ Estilos del Slider ------------------------------ */
+
+/* Contenedor principal del slider */
+.slider-container {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Contenedor de las imágenes */
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Cada imagen ocupa toda la pantalla del slider */
+.slide {
+    min-width: 100%;
+    display: none;
+}
+
+.slide img {
+    width: 100%;
+    height: 400px; /* Puedes ajustar esta altura según sea necesario */
+    object-fit: cover;
+}
+
+/* La imagen activa es la que se muestra */
+.slide.active {
+    display: block;
+}
+
+/* Botones de navegación */
+button.prev, button.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 10;
+}
+
+button.prev { left: 10px; }
+button.next { right: 10px; }
+
+button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .slide img {
+        height: 250px;  /* Ajusta la altura para pantallas más pequeñas */
+    }
+
+    button.prev, button.next {
+        padding: 5px;
+        font-size: 18px;
+    }
+}
+
+/* ------------------------------ Fin Estilos del Slider ------------------------------ */
