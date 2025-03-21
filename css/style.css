@@ -150,7 +150,7 @@ footer .icon-redes li a:hover{
 
 .wave-container {
     position: absolute;
-    top: -1px; /* Para evitar espacios visibles */
+    top: -4rem;
     left: 0;
     width: 100%;
     height: 100px;
@@ -165,7 +165,7 @@ footer .icon-redes li a:hover{
     position: absolute;
     top: 0;
     left: 0;
-    fill: var(--mor); /* Igual al fondo del footer */
+    fill: var(--mor); 
     animation: waveAnimation 6s linear infinite;
 }
 
@@ -175,12 +175,12 @@ footer .icon-redes li a:hover{
 }
 
 footer {
-    position: relative; /* Para que la ola se posicione sobre él */
-    
-    
+    position: relative;
+    background: var(--mor);
+    color: white;
     text-align: center;
-    padding: 4rem 2rem 4rem; /* Ajustado para que la ola no lo tape */
-    margin-top: 1rem; /* Espacio para que la ola quede sobre el footer */
+    padding: 6rem 5rem 6rem;
+    margin-top: 50px; 
 }
 
 
