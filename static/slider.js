@@ -1,41 +1,57 @@
-// INICIO CÓDIGO JS DEL SLIDER
-
 document.addEventListener("DOMContentLoaded", function () {
-    let index = 0;
     const slides = document.querySelectorAll(".slide");
-    const prevButton = document.querySelector(".prev");
-    const nextButton = document.querySelector(".next");
+    const prevBtn = document.querySelector(".prev");
+    const nextBtn = document.querySelector(".next");
+    let currentIndex = 0;
+    let interval;
 
-    // Función para mostrar el slide actual
-    function mostrarSlide(n) {
-        // Oculta todas las imágenes
-        slides.forEach(slide => slide.classList.remove("active"));
-
-        // Corrige el índice si es necesario
-        if (n >= slides.length) index = 0;
-        if (n < 0) index = slides.length - 1;
-
-        // Muestra la imagen correspondiente
-        slides[index].classList.add("active");
+    function showSlide(index) {
+        slides.forEach(slide => slide.style.display = "none");
+        slides[index].style.display = "block";
     }
 
-    // Función para mover el slider (anterior o siguiente)
-    function moverSlide(n) {
-        index += n;
-        mostrarSlide(index);
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % slides.length;
+        showSlide(currentIndex);
     }
 
-    // Evento para botones de navegación
-    prevButton.addEventListener("click", () => moverSlide(-1));
-    nextButton.addEventListener("click", () => moverSlide(1));
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        showSlide(currentIndex);
+    }
 
-    // Cambio automático cada 3 segundos
-    setInterval(() => {
-        moverSlide(1);
-    }, 3000);
+    function startAutoSlide() {
+        interval = setInterval(nextSlide, 3000);
+    }
 
-    // Muestra la primera imagen al cargar la página
-    mostrarSlide(index);
+    function stopAutoSlide() {
+        clearInterval(interval);
+    }
+
+    // Mostrar la primera imagen
+    showSlide(currentIndex);
+    startAutoSlide();
+
+    // Eventos de botones
+    nextBtn.addEventListener("click", () => {
+        stopAutoSlide();
+        nextSlide();
+        startAutoSlide();
+    });
+
+    prevBtn.addEventListener("click", () => {
+        stopAutoSlide();
+        prevSlide();
+        startAutoSlide();
+    });
+
+    // Evento para abrir enlace al hacer clic en la imagen
+    slides.forEach(slide => {
+        slide.addEventListener("click", function () {
+            const url = slide.getAttribute("data-url");
+            if (url) {
+                window.open(url, "_blank");
+            }
+        });
+    });
 });
-
-// FIN CÓDIGO JS DEL SLIDER

@@ -196,73 +196,54 @@ footer {
 }
 
 /*SLIDER_______________________________________*/
+/* Estilos del Slider */
 .slider-container {
     position: relative;
-    max-width: 100%;
+    width: 80%;
+    max-width: 800px;
     margin: auto;
     overflow: hidden;
 }
 
-/* Contenedor de las imágenes */
 .slider {
     display: flex;
     transition: transform 0.5s ease-in-out;
-    position: relative;
 }
 
-/* Cada imagen ocupa toda la pantalla del slider */
 .slide {
     min-width: 100%;
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
+    transition: opacity 0.5s ease-in-out;
+    cursor: pointer;
 }
 
-/* La imagen activa es la que se muestra */
-.slide.active {
-    display: block;
-    position: relative;
-    z-index: 1;
-}
-/* Imágenes del slider */
 .slide img {
     width: 100%;
-    height: 400px; /* Ajusta esta altura según sea necesario */
-    object-fit: cover;
+    display: block;
+    border-radius: 10px;
 }
 
 /* Botones de navegación */
-button.prev, button.next {
+.prev, .next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 10px;
     cursor: pointer;
-    font-size: 20px;
-    z-index: 10;
+    font-size: 18px;
+    border-radius: 5px;
 }
 
-button.prev { left: 10px; }
-button.next { right: 10px; }
+.prev {
+    left: 10px;
+}
 
-button:hover {
+.next {
+    right: 10px;
+}
+
+.prev:hover, .next:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }
-
-/* Responsividad */
-@media (max-width: 768px) {
-    .slide img {
-        height: 250px;  /* Ajusta la altura para pantallas más pequeñas */
-    }
-
-    button.prev, button.next {
-        padding: 5px;
-        font-size: 18px;
-    }
-}
-
-/* FIN ESTILOS DEL SLIDER */
