@@ -207,23 +207,29 @@ footer {
 .slider {
     display: flex;
     transition: transform 0.5s ease-in-out;
+    position: relative;
 }
 
 /* Cada imagen ocupa toda la pantalla del slider */
 .slide {
-    min-width: 80%;
+    min-width: 100%;
     display: none;
-}
-
-.slide img {
-    width: 90%;
-    height: 300px; /* Ajusta esta altura según sea necesario */
-    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 /* La imagen activa es la que se muestra */
 .slide.active {
     display: block;
+    position: relative;
+    z-index: 1;
+}
+/* Imágenes del slider */
+.slide img {
+    width: 100%;
+    height: 400px; /* Ajusta esta altura según sea necesario */
+    object-fit: cover;
 }
 
 /* Botones de navegación */

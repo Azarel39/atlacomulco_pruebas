@@ -39,4 +39,3 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // FIN CÓDIGO JS DEL SLIDER
-
