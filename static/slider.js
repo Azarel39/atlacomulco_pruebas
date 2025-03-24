@@ -13,8 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateSliderPosition() {
         const offset = -currentIndex * 100;
-        slider.style.transform = "translateX(" + offset + " %)"
-        slider.style.transition = "transform 0.5s ease-in-out";
+        slider.style.transform = "translateX(" + offset + "%)";
     }
 
     function nextSlide() {
@@ -36,25 +35,25 @@ document.addEventListener("DOMContentLoaded", function () {
         if (interval) clearInterval(interval);
     }
 
-    // Iniciar el slider y el auto-slide
+    // Iniciar el slider
     updateSliderPosition();
     startAutoSlide();
 
-    // Manejo de botones de navegación
-    nextBtn.addEventListener("click", () => {
+    // Botones de navegación
+    nextBtn.addEventListener("click", function () {
         stopAutoSlide();
         nextSlide();
         startAutoSlide();
     });
 
-    prevBtn.addEventListener("click", () => {
+    prevBtn.addEventListener("click", function () {
         stopAutoSlide();
         prevSlide();
         startAutoSlide();
     });
 
-    // Evento para abrir enlace al hacer clic en la imagen
-    slides.forEach(slide => {
+    // Clic en la imagen para redireccionar
+    slides.forEach(function (slide) {
         slide.addEventListener("click", function () {
             const url = slide.getAttribute("data-url");
             if (url) {
