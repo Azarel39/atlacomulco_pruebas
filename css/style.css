@@ -194,8 +194,6 @@ footer {
         text-align: center;
     }
 }
-
-/*SLIDER_______________________________________*/
 /* Estilos del Slider */
 .slider-container {
     position: relative;
@@ -203,16 +201,20 @@ footer {
     max-width: 800px;
     margin: auto;
     overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .slider {
     display: flex;
     transition: transform 0.5s ease-in-out;
+    width: 500%; /* 5 imágenes = 500% del contenedor */
 }
 
 .slide {
     min-width: 100%;
-    transition: opacity 0.5s ease-in-out;
+    box-sizing: border-box;
+    transition: transform 0.5s ease-in-out;
     cursor: pointer;
 }
 
