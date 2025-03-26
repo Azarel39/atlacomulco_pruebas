@@ -193,26 +193,22 @@ footer {
     }
 }
 
-/* Estilos del Slider */
+/* Contenedor del slider */
 .slider-container {
     position: relative;
     width: 100%;
-    max-width: 600px; /* Ajusta según el tamaño deseado */
+    max-width: 600px;
     margin: auto;
     overflow: hidden;
     border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+/* Imágenes en el slider */
 .slider {
     display: flex;
-    width: 500%; /* 5 imágenes, cada una ocupa 100% */
-    margin-left: 0;
-    transition: margin-left 0.5s ease-in-out;
-}
-
-.slider a {
-    flex: 0 0 100%;
-    display: block;
+    width: 500%;
+    transition: transform 0.5s ease-in-out;
 }
 
 .slider img {
@@ -220,6 +216,12 @@ footer {
     height: auto;
     display: block;
     border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Efecto zoom al pasar el mouse */
+.slider img:hover {
+    transform: scale(1.05);
 }
 
 /* Botones de navegación */
@@ -230,32 +232,48 @@ footer {
     background: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
-    padding: 10px;
+    padding: 12px 15px;
     cursor: pointer;
-    font-size: 18px;
-    transition: 0.3s;
+    font-size: 20px;
+    transition: background 0.3s;
+    border-radius: 50%;
 }
 
 .slider-btn:hover {
     background: rgba(0, 0, 0, 0.8);
 }
 
-.prev {
-    left: 10px;
+.prev { left: 10px; }
+.next { right: 10px; }
+
+/* Indicadores (puntos debajo del slider) */
+.slider-indicators {
+    text-align: center;
+    padding: 10px 0;
 }
 
-.next {
-    right: 10px;
+.slider-indicators .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 5px;
+    background: #bbb;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
 }
 
-/* Estilos Responsivos */
+.slider-indicators .active {
+    background: #0097a7;
+}
+
+/*  Ajustes para móviles */
 @media screen and (max-width: 768px) {
     .slider-container {
-        max-width: 100%;
+        max-width: 90%;
     }
-    
     .slider-btn {
-        padding: 8px;
+        padding: 10px;
         font-size: 16px;
     }
 }

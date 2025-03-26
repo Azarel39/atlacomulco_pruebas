@@ -33,7 +33,7 @@
             </aside>
         </div>
 
-        <section class="slider-container">
+        <div class="slider-container">
             <div class"slider">
                 <a href="https://www.transfermarkt.es/" target="_blank"><img src="img/img1.jpeg" alt="img1"></a>
                 <a href="https://www.transfermarkt.es/" target="_blank"><img src="img/img2.jpg" alt="Imagen 2"></a>
@@ -43,7 +43,15 @@
             </div>
             <button class="prev">&lt;</button>
             <button class="next">&gt;</button>
-            </section>
+            
+            <div class="slider-indicators">
+                <span class="dot activate" onclick="goToSlide(0)"></span>
+                <span class="dot" onclick="goToSlide(1)"></span>
+                <span class="dot" onclick="goToSlide(2)"></span>
+                <span class="dot" onclick="goToSlide(3)"></span>
+                <span class="dot" onclick="goToSlide(4)"></span>
+            </div>
+        </div>
         <!-- Conexion JS-->
         <script src="slider.js"></script>
 

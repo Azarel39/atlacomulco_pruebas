@@ -1,43 +1,47 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const slider = document.querySelector(".slider");
-    const slides = document.querySelectorAll(".slider a");
-    const prev = document.querySelector(".prev");
-    const next = document.querySelector(".next");
-    let index = 0;
-    const totalSlides = slides.length;
-    const intervalTime = 3000; // Tiempo de cambio
+const slider = document.querySelector('.slider');
+const slides = document.querySelectorAll('.slider a');
+const dots = document.querySelectorAll('.dot');
+let currentIndex = 0;
+const totalSlides = slides.length;
+let slideWidth = slides[0].offsetWidth; // Usamos offsetWidth para obtener el ancho real de la imagen
 
-    function updateSlider() {
-        slider.style.marginLeft = `-${index * 100}%`;
-    }
-
-    function nextSlide() {
-        index = (index + 1) % totalSlides;
-        updateSlider();
-    }
-
-    function prevSlide() {
-        index = (index - 1 + totalSlides) % totalSlides;
-        updateSlider();
-    }
-
-    // Cambio automático de imagen
-    let autoSlide = setInterval(nextSlide, intervalTime);
-
-    // Eventos de botones
-    next.addEventListener("click", () => {
-        nextSlide();
-        resetAutoSlide();
+// Función para actualizar el slider
+function updateSlider() {
+    // Usamos 'px' de forma segura para evitar errores de sintaxis en la propiedad transform
+    slider.style.transform = 'translateX(' + (-currentIndex * slideWidth) + 'px)'; // Desplazamos el slider
+    // Actualizamos los indicadores (puntos)
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
     });
+}
 
-    prev.addEventListener("click", () => {
-        prevSlide();
-        resetAutoSlide();
-    });
+// Función para avanzar al siguiente slide
+function nextSlide() {
+    currentIndex = (currentIndex + 1) % totalSlides;
+    updateSlider();
+}
 
-    // Reiniciar el autoSlide al hacer clic en botones
-    function resetAutoSlide() {
-        clearInterval(autoSlide);
-        autoSlide = setInterval(nextSlide, intervalTime);
-    }
+// Función para retroceder al slide anterior
+function prevSlide() {
+    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+    updateSlider();
+}
+
+// Evento para los indicadores (puntos)
+function goToSlide(index) {
+    currentIndex = index;
+    updateSlider();
+}
+
+// Auto-cambio de imagen cada 3 segundos
+setInterval(nextSlide, 3000);
+
+// Botones de navegación
+document.querySelector('.next').addEventListener('click', nextSlide);
+document.querySelector('.prev').addEventListener('click', prevSlide);
+
+// Ajustamos el ancho del slider en caso de que la ventana cambie de tamaño
+window.addEventListener('resize', () => {
+    slideWidth = slides[0].offsetWidth; // Volvemos a obtener el ancho real de la imagen
+    updateSlider();
 });
