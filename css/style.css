@@ -196,8 +196,8 @@ footer {
 /* Estilos del slider */
 .slider-container {
     position: relative;
-    width: 100%;
-    max-width: 100%;
+    width: 70%;
+    max-width: 70%;
     overflow: hidden; /* Asegura que no se muestren imágenes fuera del contenedor */
 }
 
