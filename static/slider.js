@@ -1,29 +1,29 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const slider = document.querySelector(".slider");
     const slides = document.querySelectorAll(".slide");
     const prevBtn = document.querySelector(".prev");
     const nextBtn = document.querySelector(".next");
     let currentIndex = 0;
     let interval;
 
-    if (!slider || slides.length === 0 || !prevBtn || !nextBtn) {
+    if (!slides.length || !prevBtn || !nextBtn) {
         console.error("Error: No se encontraron elementos del slider.");
         return;
     }
 
-    function updateSliderPosition() {
-        const offset = -currentIndex * 100;
-        slider.style.transform = "translateX(" + offset + "%)";
+    function updateSlider() {
+        slides.forEach((slide, index) => {
+            slide.classList.toggle("active", index === currentIndex);
+        });
     }
 
     function nextSlide() {
         currentIndex = (currentIndex + 1) % slides.length;
-        updateSliderPosition();
+        updateSlider();
     }
 
     function prevSlide() {
         currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        updateSliderPosition();
+        updateSlider();
     }
 
     function startAutoSlide() {
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Iniciar el slider
-    updateSliderPosition();
+    updateSlider();
     startAutoSlide();
 
     // Botones de navegación
