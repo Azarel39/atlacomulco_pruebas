@@ -44,8 +44,6 @@
     }
 }
 
-
-
 body {
     font-family: Montserrat, sans-serif;
     margin: 0;
@@ -119,8 +117,8 @@ footer {
 .footer-bottom {
     flex: 1;
     background-color: var(--mor);
-    padding: 10px;
-    margin-top: 20px;
+    padding: 5px;
+    margin-top: 10px;
 }
 
 footer .icon-redes{
@@ -179,7 +177,7 @@ footer {
     background: var(--mor);
     color: white;
     text-align: center;
-    padding: 6rem 5rem 6rem;
+    padding: 2rem 2rem 1rem;
     margin-top: 4rem; 
 }
 
