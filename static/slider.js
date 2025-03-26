@@ -7,8 +7,10 @@ let slideWidth = slides[0].offsetWidth; // Usamos offsetWidth para obtener el an
 
 // Función para actualizar el slider
 function updateSlider() {
-    // Usamos 'px' de forma segura para evitar errores de sintaxis en la propiedad transform
-    slider.style.transform = 'translateX(' + (-currentIndex * slideWidth) + 'px)'; // Desplazamos el slider
+    // Añadimos la animación de transición en el transform
+    slider.style.transition = 'transform 0.5s ease-in-out';
+    slider.style.transform = 'translateX(' + (-currentIndex * slideWidth) + 'px)';
+    
     // Actualizamos los indicadores (puntos)
     dots.forEach((dot, index) => {
         dot.classList.toggle('active', index === currentIndex);

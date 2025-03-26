@@ -193,87 +193,67 @@ footer {
     }
 }
 
-/* Contenedor del slider */
+/* Estilos del slider */
 .slider-container {
     position: relative;
     width: 100%;
-    max-width: 600px;
-    margin: auto;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    max-width: 100%;
+    overflow: hidden; /* Asegura que no se muestren imágenes fuera del contenedor */
 }
 
-/* Imágenes en el slider */
 .slider {
     display: flex;
-    width: 500%;
-    transition: transform 0.5s ease-in-out;
-}
-
-.slider img {
     width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 10px;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.5s ease-in-out; /* Animación suave al hacer el cambio */
 }
 
-/* Efecto zoom al pasar el mouse */
-.slider img:hover {
-    transform: scale(1.05);
+.slider a {
+    min-width: 100%; /* Cada imagen ocupa el 100% del contenedor */
+    display: block; /* Asegura que las imágenes se muestren correctamente */
 }
 
-/* Botones de navegación */
-.slider-btn {
+button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
-    padding: 12px 15px;
+    font-size: 2rem;
+    padding: 1rem;
     cursor: pointer;
-    font-size: 20px;
-    transition: background 0.3s;
+    z-index: 1;
+}
+
+/* Botón siguiente */
+.next {
+    right: 10px;
+}
+
+/* Botón anterior */
+.prev {
+    left: 10px;
+}
+
+/* Puntos de navegación (indicadores) */
+.dots-container {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+}
+
+.dot {
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
-}
-
-.slider-btn:hover {
-    background: rgba(0, 0, 0, 0.8);
-}
-
-.prev { left: 10px; }
-.next { right: 10px; }
-
-/* Indicadores (puntos debajo del slider) */
-.slider-indicators {
-    text-align: center;
-    padding: 10px 0;
-}
-
-.slider-indicators .dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin: 5px;
-    background: #bbb;
-    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    margin: 0 5px;
     cursor: pointer;
-    transition: background 0.3s;
 }
 
-.slider-indicators .active {
-    background: #0097a7;
-}
-
-/*  Ajustes para móviles */
-@media screen and (max-width: 768px) {
-    .slider-container {
-        max-width: 90%;
-    }
-    .slider-btn {
-        padding: 10px;
-        font-size: 16px;
-    }
+.dot.active {
+    background-color: rgba(255, 255, 255, 1);
 }
