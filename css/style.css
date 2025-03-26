@@ -195,11 +195,10 @@ footer {
     }
 }
 
-/* --- ESTILOS DEL SLIDER --- */
 .slider-container {
     position: relative;
     width: 100%;
-    max-width: 600px; /* Ajusta el tamaño del slider */
+    max-width: 600px; 
     margin: auto;
     overflow: hidden;
 }
@@ -223,7 +222,6 @@ footer {
     cursor: pointer;
 }
 
-/* Botones de navegación */
 .prev, .next {
     position: absolute;
     top: 50%;
