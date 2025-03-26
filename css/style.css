@@ -193,53 +193,51 @@ footer {
     }
 }
 
-/* --- ESTILOS DEL SLIDER --- */
+/* Estilos del Slider */
 .slider-container {
     position: relative;
     width: 100%;
-    max-width: 600px; /* Ajusta el tamaño del slider */
+    max-width: 600px; /* Ajusta según el tamaño deseado */
     margin: auto;
     overflow: hidden;
+    border-radius: 10px;
 }
 
 .slider {
-    position: relative;
-    width: 100%;
-    height: 400px; /* Ajusta la altura */
+    display: flex;
+    width: 500%; /* 5 imágenes, cada una ocupa 100% */
+    margin-left: 0;
+    transition: margin-left 0.5s ease-in-out;
 }
 
-.slide {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
+.slider a {
+    flex: 0 0 100%;
+    display: block;
 }
 
-.slide.active {
-    opacity: 1;
-}
-
-.slide img {
+.slider img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    display: block;
     border-radius: 10px;
-    cursor: pointer;
 }
 
 /* Botones de navegación */
-.prev, .next {
+.slider-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     background: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 10px;
     cursor: pointer;
-    font-size: 24px;
-    border-radius: 50%;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.slider-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
 }
 
 .prev {
@@ -250,6 +248,14 @@ footer {
     right: 10px;
 }
 
-.prev:hover, .next:hover {
-    background: rgba(0, 0, 0, 0.8);
+/* Estilos Responsivos */
+@media screen and (max-width: 768px) {
+    .slider-container {
+        max-width: 100%;
+    }
+    
+    .slider-btn {
+        padding: 8px;
+        font-size: 16px;
+    }
 }
