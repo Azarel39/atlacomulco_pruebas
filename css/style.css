@@ -193,36 +193,45 @@ footer {
     }
 }
 
-/* ==================== ESTILOS DEL SLIDER ==================== */
-.slider {
+/* ==================== ESTILOS DEL CARRUSEL ==================== */
+.carousel {
     position: relative;
     width: 100%;
-    max-width: 800px;
+    max-width: 1000px;
     margin: auto;
     overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.slider-container {
+.carousel-container {
     display: flex;
-    width: 300%;
-    transition: transform 0.5s ease-in-out;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.8s ease-in-out;
 }
 
-.slide {
-    width: 100%;
-    flex: 0 0 100%;
+.carousel-slide {
+    flex: 0 0 30%;
+    transform: scale(0.8);
+    transition: transform 0.5s ease;
+    opacity: 0.6;
 }
 
-.slide img {
+.carousel-slide img {
     width: 100%;
     height: auto;
-    display: block;
+    max-height: 450px;
+    object-fit: cover;
     border-radius: 10px;
 }
 
-button.prev, button.next {
+.carousel-slide.active {
+    flex: 0 0 40%;
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Botones de navegación */
+button.carousel-prev, button.carousel-next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -232,19 +241,31 @@ button.prev, button.next {
     padding: 10px 15px;
     cursor: pointer;
     font-size: 24px;
-    border-radius: 5px;
+    z-index: 10;
 }
 
-button.prev {
-    left: 10px;
-}
+button.carousel-prev { left: 10px; }
+button.carousel-next { right: 10px; }
 
-button.next {
-    right: 10px;
-}
-
-button.prev:hover, button.next:hover {
+button.carousel-prev:hover, button.carousel-next:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* ==================== FIN DE ESTILOS DEL SLIDER ==================== */
+/* Responsivo */
+@media screen and (max-width: 768px) {
+    .carousel-slide {
+        flex: 0 0 40%;
+        transform: scale(0.9);
+    }
+
+    .carousel-slide.active {
+        flex: 0 0 50%;
+        transform: scale(1.1);
+    }
+
+    .carousel-slide img {
+        max-height: 300px;
+    }
+}
+
+/* ==================== FIN DE ESTILOS DEL CARRUSEL ==================== */

@@ -1,26 +1,33 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let indice = 0;
-    const slides = document.querySelectorAll(".slide");
-    const totalSlides = slides.length;
+    const slides = document.querySelectorAll(".carousel-slide");
+    let index = 0;
 
-    function mostrarSlide(n) {
-        slides.forEach(slide => slide.style.display = "none");
-        slides[n].style.display = "block";
+    function updateCarousel() {
+        slides.forEach((slide, i) => {
+            slide.classList.remove("active");
+            slide.style.transform = `scale(0.8)`;
+            slide.style.opacity = "0.6";
+
+            if (i === index) {
+                slide.classList.add("active");
+                slide.style.transform = `scale(1)`;
+                slide.style.opacity = "1";
+            }
+        });
     }
 
-    function moverSlide(direccion) {
-        indice += direccion;
-        if (indice >= totalSlides) indice = 0;
-        if (indice < 0) indice = totalSlides - 1;
-        mostrarSlide(indice);
+    function nextSlide() {
+        index = (index + 1) % slides.length;
+        updateCarousel();
     }
 
-    // Mostrar el primer slide al cargar la página
-    mostrarSlide(indice);
+    function prevSlide() {
+        index = (index - 1 + slides.length) % slides.length;
+        updateCarousel();
+    }
 
-    // Cambiar automáticamente cada 5 segundos
-    setInterval(() => moverSlide(1), 5000);
+    document.querySelector(".carousel-next").addEventListener("click", nextSlide);
+    document.querySelector(".carousel-prev").addEventListener("click", prevSlide);
 
-    // Hacer que las funciones sean accesibles globalmente
-    window.moverSlide = moverSlide;
+    setInterval(nextSlide, 3000); // Cambio automático cada 3 segundos
 });
