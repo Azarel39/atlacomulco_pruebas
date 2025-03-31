@@ -194,56 +194,79 @@ footer {
     }
 }
 
-/* --- ESTILOS DEL SLIDER --- */
-.slider-container {
+/* ==================== ESTILOS DEL CARRUSEL ==================== */
+.carousel {
     position: relative;
     width: 100%;
-    max-width: 600px; /* Ajusta el tamaño del slider */
+    max-width: 1000px;
     margin: auto;
     overflow: hidden;
 }
 
-.slider {
+.carousel-container {
     display: flex;
-    width: 100%;
-    transition: transform 0.5s ease-in-out;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.8s ease-in-out;
 }
 
-.slide {
-    min-width: 100%;
-    box-sizing: border-box;
-    text-align: center;
+.carousel-slide {
+    flex: 0 0 30%;
+    transform: scale(0.8);
+    transition: transform 0.5s ease;
+    opacity: 0.6;
 }
 
-.slide img {
+.carousel-slide img {
     width: 100%;
     height: auto;
+    max-height: 450px;
+    object-fit: cover;
     border-radius: 10px;
-    cursor: pointer;
+}
+
+.carousel-slide.active {
+    flex: 0 0 40%;
+    transform: scale(1);
+    opacity: 1;
 }
 
 /* Botones de navegación */
-.prev, .next {
+button.carousel-prev, button.carousel-next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
     padding: 10px 15px;
     cursor: pointer;
     font-size: 24px;
-    border-radius: 50%;
+    z-index: 10;
 }
 
-.prev {
-    left: 10px;
+button.carousel-prev { left: 10px; }
+button.carousel-next { right: 10px; }
+
+button.carousel-prev:hover, button.carousel-next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-.next {
-    right: 10px;
+/* Responsivo */
+@media screen and (max-width: 768px) {
+    .carousel-slide {
+        flex: 0 0 40%;
+        transform: scale(0.9);
+    }
+
+    .carousel-slide.active {
+        flex: 0 0 50%;
+        transform: scale(1.1);
+    }
+
+    .carousel-slide img {
+        max-height: 300px;
+    }
 }
 
-.prev:hover, .next:hover {
-    background: rgba(0, 0, 0, 0.8);
-}
+/* ==================== FIN DE ESTILOS DEL CARRUSEL ==================== */

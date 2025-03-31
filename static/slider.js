@@ -1,64 +1,33 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const slider = document.querySelector(".slider");
-    const slides = document.querySelectorAll(".slide");
-    const prevBtn = document.querySelector(".prev");
-    const nextBtn = document.querySelector(".next");
-    let currentIndex = 0;
-    let interval;
+    const slides = document.querySelectorAll(".carousel-slide");
+    let index = 0;
 
-    if (!slider || slides.length === 0 || !prevBtn || !nextBtn) {
-        console.error("Error: No se encontraron elementos del slider.");
-        return;
-    }
+    function updateCarousel() {
+        slides.forEach((slide, i) => {
+            slide.classList.remove("active");
+            slide.style.transform = `scale(0.8)`;
+            slide.style.opacity = "0.6";
 
-    function updateSliderPosition() {
-        const offset = -currentIndex * 100;
-        slider.style.transform = "translateX(" + offset + "%)";
+            if (i === index) {
+                slide.classList.add("active");
+                slide.style.transform = `scale(1)`;
+                slide.style.opacity = "1";
+            }
+        });
     }
 
     function nextSlide() {
-        currentIndex = (currentIndex + 1) % slides.length;
-        updateSliderPosition();
+        index = (index + 1) % slides.length;
+        updateCarousel();
     }
 
     function prevSlide() {
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        updateSliderPosition();
+        index = (index - 1 + slides.length) % slides.length;
+        updateCarousel();
     }
 
-    function startAutoSlide() {
-        stopAutoSlide();
-        interval = setInterval(nextSlide, 3000);
-    }
+    document.querySelector(".carousel-next").addEventListener("click", nextSlide);
+    document.querySelector(".carousel-prev").addEventListener("click", prevSlide);
 
-    function stopAutoSlide() {
-        if (interval) clearInterval(interval);
-    }
-
-    // Iniciar el slider
-    updateSliderPosition();
-    startAutoSlide();
-
-    // Botones de navegación
-    nextBtn.addEventListener("click", function () {
-        stopAutoSlide();
-        nextSlide();
-        startAutoSlide();
-    });
-
-    prevBtn.addEventListener("click", function () {
-        stopAutoSlide();
-        prevSlide();
-        startAutoSlide();
-    });
-
-    // Clic en la imagen para redireccionar
-    slides.forEach(function (slide) {
-        slide.addEventListener("click", function () {
-            const url = slide.getAttribute("data-url");
-            if (url) {
-                window.open(url, "_blank");
-            }
-        });
-    });
+    setInterval(nextSlide, 3000); // Cambio automático cada 3 segundos
 });
