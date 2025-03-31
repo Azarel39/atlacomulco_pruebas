@@ -184,7 +184,7 @@ footer .icon-redes li a:hover{
 
 .footer-image {
     position: relative;
-    width: 300px; /* Aumenta el tamaño de la imagen */
+    width: 300px;
     margin: auto;
     display: flex;
     justify-content: center;
