@@ -214,13 +214,13 @@ footer {
 }
 
 @keyframes girarRehilete {
-    0% { transform: rotate(-10deg); } 
-    50% { transform: rotate(10deg); } 
-    100% { transform: rotate(-10deg); } 
+    0% { transform: rotate(-200deg); } 
+    50% { transform: rotate(100deg); } 
+    100% { transform: rotate(-200deg); } 
 }
 
 .footer-extra-img {
-    animation: girarRehilete 6s linear infinite;
+    animation: girarRehilete 4s linear infinite;
     transform-origin: center;
     display: block;
     margin: 0 auto;
