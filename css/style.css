@@ -91,16 +91,6 @@ aside {
     background: #f4f4f4;
 }
 
-footer {
-    position: relative;
-    background: var(--mor);
-    color: white;
-    text-align: center;
-    padding: 4rem 5rem 6rem;
-    margin-top: auto;
-}
-
-
 .footer-container {
     display: flex;
     align-items: center;
