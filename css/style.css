@@ -105,9 +105,10 @@ aside {
 
 .atlacomulco-img img {
     max-width: 150px;
-    height: auto;
+    height: 120px;
     border-radius: 10px;
 }
+
 
 .contacto-info {
     flex: 1;
@@ -173,26 +174,32 @@ footer .icon-redes li a:hover{
 }
 
 .footer-image {
-    position: relative;
-    width: 300px;
-    margin: auto;
-    display: flex;
-    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    z-index: 0; 
+    opacity: 0.5;
 }
 
 .footer-extra-img {            
-    width: 100%;
+    width: 300px;
     height: auto;
-    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
 }
+
 
 footer {
     position: relative;
     background: var(--mor);
     color: white;
     text-align: center;
-    padding: 2rem 2rem 1rem;
-    margin-top: 4rem; 
+    padding: 4rem 2rem;
+    margin-top: 4rem;
+    z-index: 1; 
 }
 
 
