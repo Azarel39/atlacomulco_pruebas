@@ -103,10 +103,20 @@ footer {
 
 .footer-container {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
     justify-content: flex-start;
-    align-items: flex-start;
-    padding: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.atlacomulco-img {
+    flex: 0 0 150px;
+}
+
+.atlacomulco-img img {
+    max-width: 150px;
+    height: auto;
+    border-radius: 10px;
 }
 
 .contacto-info {
@@ -142,7 +152,6 @@ footer .icon-redes li a {
     transition: 0.5s;
 }
 
-
 footer .icon-redes li a:hover{
     transform: translateY(-10px);
 }
@@ -173,6 +182,19 @@ footer .icon-redes li a:hover{
     100% { transform: translateX(-50%); }
 }
 
+.footer-image {
+    position: relative;
+    width: 300px; /* Aumenta el tamaño de la imagen */
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-extra-img {            
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
 
 footer {
     position: relative;
