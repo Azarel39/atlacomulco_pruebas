@@ -227,80 +227,97 @@ footer {
     width: 400px;
 }
 
+/* ==================== ESTILOS DEL SLIDER CON CAJA ==================== */
+.slider-wrapper {
+    background-color: #b9b952; /* Beige muy clarito */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 700px; /* Slider más compacto */
+    margin: auto;
+}
 
-/* ==================== ESTILOS DEL CARRUSEL ==================== */
-.carousel {
+.slider-container {
     position: relative;
     width: 100%;
-    max-width: 1000px;
-    margin: auto;
+    text-align: center;
+}
+
+.slider-title {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #eb1010;
+}
+
+.carousel {
+    position: relative;
     overflow: hidden;
+    width: 100%;
+    border-radius: 10px;
 }
 
 .carousel-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
     transition: transform 0.8s ease-in-out;
 }
 
 .carousel-slide {
-    flex: 0 0 30%;
-    transform: scale(0.8);
-    transition: transform 0.5s ease;
+    min-width: 100%; /* Una imagen por vez */
+    transition: transform 0.5s ease, opacity 0.5s ease;
     opacity: 0.6;
 }
 
 .carousel-slide img {
-    width: 100%;
+    width: 40%; /* Tamaño reducido pero visible */
     height: auto;
-    max-height: 450px;
-    object-fit: cover;
     border-radius: 10px;
+    margin: 0 auto;
 }
 
 .carousel-slide.active {
-    flex: 0 0 40%;
-    transform: scale(1);
     opacity: 1;
+    transform: scale(1.05); /* Ligero zoom */
 }
 
 /* Botones de navegación */
-button.carousel-prev, button.carousel-next {
+.carousel-prev, .carousel-next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
+    background: rgba(177, 23, 23, 0.6);
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 15px;
+    font-size: 20px;
     cursor: pointer;
-    font-size: 24px;
+    border-radius: 50%;
+    transition: background 0.3s ease;
     z-index: 10;
 }
 
-button.carousel-prev { left: 10px; }
-button.carousel-next { right: 10px; }
+.carousel-prev { left: 10px; }
+.carousel-next { right: 10px; }
 
-button.carousel-prev:hover, button.carousel-next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+.carousel-prev:hover, .carousel-next:hover {
+    background: rgba(0, 0, 0, 0.9);
 }
 
 /* Responsivo */
 @media screen and (max-width: 768px) {
-    .carousel-slide {
-        flex: 0 0 40%;
-        transform: scale(0.9);
+    .slider-title {
+        font-size: 20px;
     }
 
-    .carousel-slide.active {
-        flex: 0 0 50%;
-        transform: scale(1.1);
+    .carousel-prev, .carousel-next {
+        font-size: 16px;
+        padding: 8px;
     }
 
     .carousel-slide img {
-        max-height: 300px;
+        width: 75%; /* Ajuste en pantallas pequeñas */
     }
 }
 
-/* ==================== FIN DE ESTILOS DEL CARRUSEL ==================== */
+/* ==================== FIN DE ESTILOS DEL SLIDER CON CAJA ==================== */
