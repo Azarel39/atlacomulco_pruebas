@@ -185,11 +185,15 @@ footer .icon-redes li a:hover{
     opacity: 0.3;   
 }
 
-.footer-extra-img {            
+.footer-extra-img {
     width: 400px;
     height: auto;
     display: block;
     margin: 0 auto;
+}
+.footer-extra-img:hover{
+    -webkit-transform: rotate(360deg);
+    transition: 2s ease-in-out;
 }
 
 footer {
@@ -211,20 +215,6 @@ footer {
     .contact-info {
         text-align: center;
     }
-}
-
-@keyframes girarRehilete {
-    0% { transform: rotate(-200deg); } 
-    50% { transform: rotate(100deg); } 
-    100% { transform: rotate(-200deg); } 
-}
-
-.footer-extra-img {
-    animation: girarRehilete 4s linear infinite;
-    transform-origin: center;
-    display: block;
-    margin: 0 auto;
-    width: 400px;
 }
 
 
