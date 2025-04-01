@@ -217,21 +217,6 @@ footer {
     }
 }
 
-<<<<<<< HEAD
-=======
-@keyframes girarRehilete {
-    0% { transform: rotate(-200deg); } 
-    50% { transform: rotate(100deg); } 
-    100% { transform: rotate(-200deg); } 
-}
-
-.footer-extra-img {
-    animation: girarRehilete 4s linear infinite;
-    transform-origin: center;
-    display: block;
-    margin: 0 auto;
-    width: 400px;
-}
 
 /* ==================== ESTILOS DEL SLIDER  ==================== */
 .slider-wrapper {
@@ -243,7 +228,6 @@ footer {
     max-width: 500px; 
     margin: auto;
 }
->>>>>>> 5e7c8d9670e5f3da3a328fffd38449011840ae53
 
 .slider-container {
     position: relative;
