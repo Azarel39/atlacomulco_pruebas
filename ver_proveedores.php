@@ -11,9 +11,11 @@ if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['tipo'])) {
 $tipo_usuario = $_SESSION['tipo'];
 
 if ($tipo_usuario == 'admin') {
+    // Si es admin, mostrar todos los proveedores
     $sql = "SELECT * FROM proveedores";
     $result = mysqli_query($conn, $sql);
 } else {
+    // Si es proveedor, mostrar solo los registros de ese proveedor
     $sql = "SELECT * FROM proveedores WHERE usuario_id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "i", $_SESSION['usuario_id']);
@@ -36,7 +38,7 @@ if ($tipo_usuario == 'admin') {
     <h2>Lista de Proveedores</h2>
     
     <?php if ($tipo_usuario == 'admin'): ?>
-        <p><strong>Como administrador, puedes ver y editar todos los proveedores registrados. No puedes agregar ni eliminar proveedores desde esta página.</strong></p>
+        <p><strong>Como administrador, puedes ver y editar todos los proveedores registrados.</strong></p>
     <?php else: ?>
         <p><strong>Como proveedor, solo puedes ver y editar tus propios datos.</strong></p>
     <?php endif; ?>
@@ -51,7 +53,9 @@ if ($tipo_usuario == 'admin') {
                 <th>Correo</th>
                 <th>Dirección</th>
                 <th>Giro Económico</th>
+                
                 <?php if ($tipo_usuario == 'admin'): ?>
+                    <!-- Solo mostrar la columna "Acciones" si es admin -->
                     <th>Acciones</th>
                 <?php endif; ?>
             </tr>
@@ -70,10 +74,7 @@ if ($tipo_usuario == 'admin') {
                 <td><?php echo $row['giro_economico']; ?></td>
                 
                 <?php if ($tipo_usuario == 'admin'): ?>
-                    <td>
-                        <a href="editar_proveedor.php?id=<?php echo $row['id']; ?>">Editar</a>
-                    </td>
-                <?php elseif ($tipo_usuario == 'proveedor' && $row['usuario_id'] == $_SESSION['usuario_id']): ?>
+                    <!-- Solo mostrar la opción de "Editar" si es admin -->
                     <td>
                         <a href="editar_proveedor.php?id=<?php echo $row['id']; ?>">Editar</a>
                     </td>

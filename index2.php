@@ -9,8 +9,7 @@
     <div class="button-container">
         <button onclick="window.location.href='registro.php'">Crear Cuenta</button>
         <button onclick="window.location.href='login.php'">Iniciar Sesión</button>
-        <button onclick="window.location.href='ver_proveedores.php'">Ver Proveedores</button>
-        <button onclick="window.location.href='editar_proveedor.php'">Editar</button>
+        <button onclick="window.location.href='ver_proveedores.php'">Ver Registro</button>
     </div>
 </div>
 
