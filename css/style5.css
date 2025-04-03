@@ -1,0 +1,119 @@
+:root {
+    --blanco: #ffffff; 
+    --obscuro: #212121;
+    --primario: #ffc107;
+    --secundario: #0097a7;
+    --gris: #757575;
+    --gobierno: #9D2449;
+    --mor: #AF272F;
+}
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--blanco);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Contenedor del formulario */
+.form-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px; /* Ajusta para que no se superponga al header */
+    margin-bottom: 70px; /* Ajusta para que no se superponga al footer */
+}
+
+.container {
+    background-color: var(--blanco);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px var(--obscuro);
+    width: 400px; /* Ajustado para mayor visibilidad */
+    text-align: center;
+}
+
+h2 {
+    color: var(--obscuro);
+    margin-bottom: 15px;
+}
+
+/* Estilos para los mensajes de error y éxito */
+.error {
+    background-color: var(--blanco);
+    color: var(--mor);
+    padding: 10px;
+    margin-bottom: 15px;
+    border-left: 5px solid var(--mor);
+    border-radius: 5px;
+}
+
+.success {
+    background-color: var(--blanco);
+    color: var(--mor);
+    padding: 5px;
+    margin-bottom: 10px;
+    border-left: 5px solid var(--mor);
+    border-radius: 5px;
+}
+
+/* Estilo para el formulario */
+.form-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--gris);
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: var(--mor);
+    outline: none;
+}
+
+.btn {
+    background-color: var(--mor);
+    color: var(--blanco);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--gobierno);
+}
+
+/* Estilo para el enlace de "volver" */
+.volver {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: var(--mor);
+    font-weight: bold;
+    text-align: center;
+}
+
+.volver:hover {
+    text-decoration: underline;
+}

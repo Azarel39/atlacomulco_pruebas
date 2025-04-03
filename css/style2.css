@@ -1,0 +1,39 @@
+:root
+{
+    --blanco: #ffffff; 
+    --obscuro: #212121;
+    --primario: #ffc107;
+    --secundario: #0097a7;
+    --gris: #757575;
+    --gobierno: #9D2449;
+    --mor:#AF272F;
+}
+
+.container {
+    text-align: center;
+    padding: 50px;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.button-container button {
+    background-color: var(--mor);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 200px;
+    transition: background 0.3s ease;
+}
+
+.button-container button:hover {
+    background-color: var(--gobierno);
+}

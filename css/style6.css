@@ -1,0 +1,46 @@
+/* Contenedor de la tabla */
+.table-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 100px auto 50px;
+    padding: 20px;
+    background: var(--blanco);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px var(--obscuro);
+    text-align: center;
+}
+
+/* Estilos para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid var(--gris);
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: var(--mor);
+    color: var(--blanco);
+}A
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Estilo para el enlace de volver */
+.volver {
+    display: block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: var(--mor);
+    font-weight: bold;
+}
+
+.volver:hover {
+    text-decoration: underline;
+}

@@ -62,3 +62,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     setInterval(nextSlide, 3000); // Cambio automático cada 3 segundos
 });
+
+
+// funcion para formulario de editar proveedor
+function mostrarFormulario(id) {
+    var form = document.getElementById("form-editar-" + id);
+    form.style.display = (form.style.display === "none") ? "block" : "none";
+}

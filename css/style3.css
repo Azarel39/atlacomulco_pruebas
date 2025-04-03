@@ -1,0 +1,123 @@
+:root {
+    --blanco: #ffffff; 
+    --obscuro: #212121;
+    --primario: #ffc107;
+    --secundario: #0097a7;
+    --gris: #757575;
+    --gobierno: #9D2449;
+    --mor: #AF272F;
+}
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--blanco);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Contenedor del formulario */
+.form-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px; /* Ajusta para que no se superponga al header */
+    margin-bottom: 70px; /* Ajusta para que no se superponga al footer */
+}
+
+.container {
+    background-color: var(--blanco);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px var(--obscuro);
+    width: 100%;
+    max-width: 400px; /* Limita el tamaño en pantallas grandes */
+    text-align: center;
+}
+
+h2 {
+    color: var(--obscuro);
+    margin-bottom: 20px;
+}
+
+/* Estilos para los mensajes de error y éxito */
+.error, .success {
+    background-color: var(--blanco);
+    color: var(--mor);
+    padding: 10px;
+    margin-bottom: 15px;
+    border-left: 5px solid var(--mor);
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Estilo para el formulario */
+.form-group {
+    text-align: left;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Espacio entre label e input */
+}
+
+label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input {
+    width: 93.5%;
+    padding: 12px;
+    border: 1px solid var(--gris);
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: var(--mor);
+    outline: none;
+}
+
+/* Botón de envío */
+.btn {
+    background-color: var(--mor);
+    color: var(--blanco);
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: var(--gobierno);
+}
+
+/* Enlace de volver */
+.volver {
+    display: block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: var(--mor);
+    font-weight: bold;
+}
+
+.volver:hover {
+    text-decoration: underline;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 480px) {
+    .container {
+        padding: 30px;
+        max-width: 90%; /* Para mejor visualización en móviles */
+    }
+}
