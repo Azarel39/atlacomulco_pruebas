@@ -8,7 +8,6 @@
     --mor: #AF272F;
 }
 
-/* Estilos generales */
 body {
     font-family: Arial, sans-serif;
     background-color: var(--blanco);
@@ -19,14 +18,14 @@ body {
     min-height: 100vh;
 }
 
-/* Contenedor del formulario */
+/*formulario */
 .form-container {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 80px; /* Ajusta para que no se superponga al header */
-    margin-bottom: 70px; /* Ajusta para que no se superponga al footer */
+    margin-top: 80px; 
+    margin-bottom: 70px;
 }
 
 .container {
@@ -34,7 +33,7 @@ body {
     padding: 30px;
     border-radius: 20px;
     box-shadow: 0 4px 8px var(--obscuro);
-    width: 400px; /* Ajustado para mayor visibilidad */
+    width: 400px; 
     text-align: center;
 }
 
@@ -43,7 +42,7 @@ h2 {
     margin-bottom: 15px;
 }
 
-/* Estilos para los mensajes de error y éxito */
+/*error y éxito */
 .error {
     background-color: var(--blanco);
     color: var(--mor);
@@ -62,7 +61,7 @@ h2 {
     border-radius: 5px;
 }
 
-/* Estilo para el formulario */
+/*formulario */
 .form-group {
     text-align: left;
     margin-bottom: 15px;
@@ -104,7 +103,7 @@ input:focus {
     background-color: var(--gobierno);
 }
 
-/* Estilo para el enlace de "volver" */
+/* volver */
 .volver {
     display: block;
     margin-top: 10px;

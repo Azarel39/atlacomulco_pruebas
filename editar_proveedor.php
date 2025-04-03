@@ -1,49 +1,18 @@
-<?php include 'header.php'; ?>
-<?php
-include 'conexion.php';
+<?php 
+include 'header.php'; 
+include 'conexion.php'; 
 session_start();
 
-// Verificar si el usuario está autenticado
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: login.php");
     exit();
 }
 
 $usuario_id = $_SESSION['usuario_id'];
+$tipo_usuario = $_SESSION['tipo']; 
 $mensaje = "";
 
-// Variable para los datos del proveedor que se editarán
-$proveedor = null;
-
-// Si se hace clic en "Editar", obtenemos los datos del proveedor
-if (isset($_GET['id'])) {
-    $proveedor_id = $_GET['id'];
-
-    // Consulta para obtener el proveedor a editar
-    $sql = "SELECT * FROM proveedores WHERE id = ? AND usuario_id = ?";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "ii", $proveedor_id, $usuario_id);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-
-    // Obtener los datos del proveedor
-    if ($proveedor = mysqli_fetch_assoc($result)) {
-        // Datos del proveedor para prellenar el formulario
-        $nombre_representante = $proveedor['nombre_representante'];
-        $nombre_comercial = $proveedor['nombre_comercial'];
-        $razon_social = $proveedor['razon_social'];
-        $telefono = $proveedor['telefono'];
-        $correo = $proveedor['correo'];
-        $direccion = $proveedor['direccion'];
-        $giro_economico = $proveedor['giro_economico'];
-    } else {
-        // Si no se encuentra el proveedor
-        echo "<p>Proveedor no encontrado.</p>";
-    }
-}
-
-// Actualizar los datos del proveedor si se hace POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && $tipo_usuario == 'admin') {
     $proveedor_id = $_POST['id'];
     $nombre_representante = $_POST['nombre_representante'];
     $nombre_comercial = $_POST['nombre_comercial'];
@@ -53,10 +22,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $direccion = $_POST['direccion'];
     $giro_economico = $_POST['giro_economico'];
 
-    // Actualizar los datos del proveedor
-    $sql = "UPDATE proveedores SET nombre_representante = ?, nombre_comercial = ?, razon_social = ?, telefono = ?, correo = ?, direccion = ?, giro_economico = ? WHERE id = ? AND usuario_id = ?";
+    $sql = "UPDATE proveedores SET nombre_representante = ?, nombre_comercial = ?, razon_social = ?, telefono = ?, correo = ?, direccion = ?, giro_economico = ? WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "ssssssssi", $nombre_representante, $nombre_comercial, $razon_social, $telefono, $correo, $direccion, $giro_economico, $proveedor_id, $usuario_id);
+    mysqli_stmt_bind_param($stmt, "sssssssi", $nombre_representante, $nombre_comercial, $razon_social, $telefono, $correo, $direccion, $giro_economico, $proveedor_id);
 
     if (mysqli_stmt_execute($stmt)) {
         $mensaje = '<p class="success">✅ Proveedor actualizado correctamente.</p>';
@@ -72,16 +40,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Proveedor</title>
-    <link rel="stylesheet" href="css/style7.css"> <!-- Enlace al archivo CSS -->
+    <link rel="stylesheet" href="css/style7.css">
 </head>
 <body>
     <div class="container">
         <h2>Proveedores Registrados</h2>
-
-        <!-- Mostrar mensaje de éxito o error -->
         <?php echo $mensaje; ?>
 
-        <!-- Tabla de proveedores -->
         <div class="table-container">
             <table>
                 <thead>
@@ -93,19 +58,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <th>Correo</th>
                         <th>Dirección</th>
                         <th>Giro Económico</th>
-                        <th>Acción</th>
+                        <?php if ($tipo_usuario == 'admin'): ?> 
+                            <th>Acción</th>
+                        <?php endif; ?>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    // Consulta para obtener todos los proveedores del usuario
-                    $sql = "SELECT * FROM proveedores WHERE usuario_id = ?";
-                    $stmt = mysqli_prepare($conn, $sql);
-                    mysqli_stmt_bind_param($stmt, "i", $usuario_id);
-                    mysqli_stmt_execute($stmt);
-                    $result = mysqli_stmt_get_result($stmt);
-
-                    // Mostrar los proveedores
+                    $sql = "SELECT * FROM proveedores";
+                    $result = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($row['nombre_representante']) . "</td>";
@@ -115,7 +76,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo "<td>" . htmlspecialchars($row['correo']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['direccion']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['giro_economico']) . "</td>";
-                        echo "<td><button onclick='mostrarFormularioEditar(" . $row['id'] . ")' class='edit-btn'>Editar</button></td>";
+
+                        if ($tipo_usuario == 'admin') {
+                            echo "<td><button class='edit-btn' onclick='mostrarFormularioEditar(" . json_encode($row) . ")'>Editar</button></td>";
+                        }
+                        
                         echo "</tr>";
                     }
                     ?>
@@ -123,38 +88,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </table>
         </div>
 
-        <!-- Formulario de edición (oculto inicialmente) -->
         <div id="formulario-editar" class="edit-form" style="display:none;">
             <h3>Editar Datos del Proveedor</h3>
             <form method="post">
                 <input type="hidden" name="id" id="proveedor_id">
                 <div class="form-group">
                     <label>Nombre del Representante Legal:</label>
-                    <input type="text" name="nombre_representante" value="<?php echo isset($nombre_representante) ? htmlspecialchars($nombre_representante) : ''; ?>" required>
+                    <input type="text" name="nombre_representante" id="nombre_representante" required>
                 </div>
                 <div class="form-group">
                     <label>Nombre Comercial:</label>
-                    <input type="text" name="nombre_comercial" value="<?php echo isset($nombre_comercial) ? htmlspecialchars($nombre_comercial) : ''; ?>" required>
+                    <input type="text" name="nombre_comercial" id="nombre_comercial" required>
                 </div>
                 <div class="form-group">
                     <label>Razón Social:</label>
-                    <input type="text" name="razon_social" value="<?php echo isset($razon_social) ? htmlspecialchars($razon_social) : ''; ?>" required>
+                    <input type="text" name="razon_social" id="razon_social" required>
                 </div>
                 <div class="form-group">
                     <label>Teléfono:</label>
-                    <input type="tel" name="telefono" value="<?php echo isset($telefono) ? htmlspecialchars($telefono) : ''; ?>" required>
+                    <input type="tel" name="telefono" id="telefono" required>
                 </div>
                 <div class="form-group">
                     <label>Correo Electrónico:</label>
-                    <input type="email" name="correo" value="<?php echo isset($correo) ? htmlspecialchars($correo) : ''; ?>" required>
+                    <input type="email" name="correo" id="correo" required>
                 </div>
                 <div class="form-group">
                     <label>Dirección:</label>
-                    <input type="text" name="direccion" value="<?php echo isset($direccion) ? htmlspecialchars($direccion) : ''; ?>" required>
+                    <input type="text" name="direccion" id="direccion" required>
                 </div>
                 <div class="form-group">
                     <label>Giro Económico:</label>
-                    <input type="text" name="giro_economico" value="<?php echo isset($giro_economico) ? htmlspecialchars($giro_economico) : ''; ?>" required>
+                    <input type="text" name="giro_economico" id="giro_economico" required>
                 </div>
                 <button type="submit" class="save-btn">Guardar Cambios</button>
                 <button type="button" class="save-btn" onclick="ocultarFormulario()">Cancelar</button>
@@ -162,19 +126,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <a href="logout.php" class="volver">Cerrar Sesión</a>
+        <a href="index2.php" class="volver-btn">Volver</a>
+
     </div>
 
     <script>
-        function mostrarFormularioEditar(proveedor_id) {
-            var formulario = document.getElementById('formulario-editar');
-            formulario.style.display = 'block';  // Mostrar el formulario
-            var proveedor_id_input = document.getElementById('proveedor_id');
-            proveedor_id_input.value = proveedor_id;  // Asignar el ID del proveedor al campo oculto
+        function mostrarFormularioEditar(proveedor) {
+            document.getElementById('formulario-editar').style.display = 'block';
+            document.getElementById('proveedor_id').value = proveedor.id;
+            document.getElementById('nombre_representante').value = proveedor.nombre_representante;
+            document.getElementById('nombre_comercial').value = proveedor.nombre_comercial;
+            document.getElementById('razon_social').value = proveedor.razon_social;
+            document.getElementById('telefono').value = proveedor.telefono;
+            document.getElementById('correo').value = proveedor.correo;
+            document.getElementById('direccion').value = proveedor.direccion;
+            document.getElementById('giro_economico').value = proveedor.giro_economico;
         }
 
         function ocultarFormulario() {
-            var formulario = document.getElementById('formulario-editar');
-            formulario.style.display = 'none';  // Ocultar el formulario
+            document.getElementById('formulario-editar').style.display = 'none';
         }
     </script>
 </body>

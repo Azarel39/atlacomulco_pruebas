@@ -25,8 +25,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 80px; /* Ajusta para que no se superponga al header */
-    margin-bottom: 70px; /* Ajusta para que no se superponga al footer */
+    margin-top: 80px;
+    margin-bottom: 70px; 
 }
 
 .container {
@@ -35,7 +35,7 @@ body {
     border-radius: 20px;
     box-shadow: 0 4px 8px var(--obscuro);
     width: 100%;
-    max-width: 400px; /* Limita el tamaño en pantallas grandes */
+    max-width: 400px; 
     text-align: center;
 }
 
@@ -44,7 +44,7 @@ h2 {
     margin-bottom: 20px;
 }
 
-/* Estilos para los mensajes de error y éxito */
+/* mensajes de error y éxito */
 .error, .success {
     background-color: var(--blanco);
     color: var(--mor);
@@ -55,13 +55,13 @@ h2 {
     font-size: 14px;
 }
 
-/* Estilo para el formulario */
+/* formulario */
 .form-group {
     text-align: left;
     margin-bottom: 15px;
     display: flex;
     flex-direction: column;
-    gap: 5px; /* Espacio entre label e input */
+    gap: 5px;
 }
 
 label {
@@ -83,7 +83,7 @@ input:focus {
     outline: none;
 }
 
-/* Botón de envío */
+/* envío */
 .btn {
     background-color: var(--mor);
     color: var(--blanco);
@@ -101,7 +101,7 @@ input:focus {
     background-color: var(--gobierno);
 }
 
-/* Enlace de volver */
+/* volver */
 .volver {
     display: block;
     margin-top: 15px;
@@ -114,10 +114,10 @@ input:focus {
     text-decoration: underline;
 }
 
-/* Ajustes responsivos */
+/* responsivos */
 @media (max-width: 480px) {
     .container {
         padding: 30px;
-        max-width: 90%; /* Para mejor visualización en móviles */
+        max-width: 90%; 
     }
 }

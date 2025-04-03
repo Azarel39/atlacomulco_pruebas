@@ -1,5 +1,5 @@
 <?php include 'header.php'; ?>
-<link rel="stylesheet" href="css/style2.css"> <!-- SOLO SE APLICA AQUÍ -->
+<link rel="stylesheet" href="css/style2.css">
 
 
 <div class="container">

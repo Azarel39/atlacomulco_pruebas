@@ -1,33 +1,27 @@
 <?php include 'header.php'; ?>
 
 <?php
-// Incluir la conexión a la base de datos
 include 'conexion.php';
 
-$mensaje = ""; // Variable para mostrar mensajes
+$mensaje = ""; 
 
-// Verificar si se envió el formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = trim($_POST['name']);
     $correo = trim($_POST['correo']);
     $password = trim($_POST['password']);
 
-    // Validar que los campos no estén vacíos
     if (empty($name) || empty($correo) || empty($password)) {
         $mensaje = '<p class="error">⚠️ Todos los campos son obligatorios.</p>';
     } else {
-        // Encriptar la contraseña
-        $password_hash = password_hash($password, PASSWORD_DEFAULT);
-
-        // Insertar el usuario en la base de datos
         if ($conn) {
             $sql = "INSERT INTO usuarios (nombre_usuario, correo, password) VALUES (?, ?, ?)";
             $stmt = mysqli_prepare($conn, $sql);
 
             if ($stmt) {
-                mysqli_stmt_bind_param($stmt, "sss", $name, $correo, $password_hash);
+                mysqli_stmt_bind_param($stmt, "sss", $name, $correo, $password);
                 if (mysqli_stmt_execute($stmt)) {
-                    $mensaje = '<p class="success">✅ Usuario registrado correctamente.</p>';
+                    header("Location: registro_proveedores.php");
+                    exit();
                 } else {
                     $mensaje = '<p class="error">❌ Error al registrar: ' . mysqli_stmt_error($stmt) . '</p>';
                 }
@@ -48,14 +42,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Usuario</title>
-    <link rel="stylesheet" href="css/style3.css"> <!-- Enlace al archivo CSS externo -->
+    <link rel="stylesheet" href="css/style3.css">
 </head>
 <body>
 
 <div class="form-container">
     <div class="container">
         <h2>Registrar Usuario</h2>
-        <?php echo $mensaje; ?>  <!-- Mostrar mensajes de éxito/error -->
+        <?php echo $mensaje; ?> 
         <form method="post">
             <div class="form-group">
                 <label>Nombre:</label>

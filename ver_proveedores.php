@@ -1,10 +1,25 @@
 <?php
-include 'header.php';
+include 'header.php'; 
 include 'conexion.php';
+session_start();
 
-// Obtener todos los proveedores de la base de datos
-$sql = "SELECT * FROM proveedores";
-$result = mysqli_query($conn, $sql);
+if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['tipo'])) {
+    header("Location: login.php"); 
+    exit();
+}
+
+$tipo_usuario = $_SESSION['tipo'];
+
+if ($tipo_usuario == 'admin') {
+    $sql = "SELECT * FROM proveedores";
+    $result = mysqli_query($conn, $sql);
+} else {
+    $sql = "SELECT * FROM proveedores WHERE usuario_id = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $_SESSION['usuario_id']);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+}
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +35,12 @@ $result = mysqli_query($conn, $sql);
 <div class="table-container">
     <h2>Lista de Proveedores</h2>
     
+    <?php if ($tipo_usuario == 'admin'): ?>
+        <p><strong>Como administrador, puedes ver y editar todos los proveedores registrados. No puedes agregar ni eliminar proveedores desde esta página.</strong></p>
+    <?php else: ?>
+        <p><strong>Como proveedor, solo puedes ver y editar tus propios datos.</strong></p>
+    <?php endif; ?>
+
     <table>
         <thead>
             <tr>
@@ -30,10 +51,15 @@ $result = mysqli_query($conn, $sql);
                 <th>Correo</th>
                 <th>Dirección</th>
                 <th>Giro Económico</th>
+                <?php if ($tipo_usuario == 'admin'): ?>
+                    <th>Acciones</th>
+                <?php endif; ?>
             </tr>
         </thead>
         <tbody>
-            <?php while ($row = mysqli_fetch_assoc($result)): ?>
+            <?php 
+            while ($row = mysqli_fetch_assoc($result)): 
+            ?>
             <tr>
                 <td><?php echo $row['nombre_representante']; ?></td>
                 <td><?php echo $row['nombre_comercial']; ?></td>
@@ -42,6 +68,16 @@ $result = mysqli_query($conn, $sql);
                 <td><?php echo $row['correo']; ?></td>
                 <td><?php echo $row['direccion']; ?></td>
                 <td><?php echo $row['giro_economico']; ?></td>
+                
+                <?php if ($tipo_usuario == 'admin'): ?>
+                    <td>
+                        <a href="editar_proveedor.php?id=<?php echo $row['id']; ?>">Editar</a>
+                    </td>
+                <?php elseif ($tipo_usuario == 'proveedor' && $row['usuario_id'] == $_SESSION['usuario_id']): ?>
+                    <td>
+                        <a href="editar_proveedor.php?id=<?php echo $row['id']; ?>">Editar</a>
+                    </td>
+                <?php endif; ?>
             </tr>
             <?php endwhile; ?>
         </tbody>
@@ -50,10 +86,10 @@ $result = mysqli_query($conn, $sql);
     <a href="index2.php" class="volver">Volver</a>
 </div>
 
+<?php 
+mysqli_close($conn);
+include 'footer.php'; 
+?>
+
 </body>
 </html>
-
-<?php
-include 'footer.php';
-mysqli_close($conn);
-?>

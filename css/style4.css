@@ -8,7 +8,6 @@
     --mor: #AF272F;
 }
 
-/* Estilos generales */
 body {
     font-family: Arial, sans-serif;
     background-color: var(--blanco);
@@ -19,7 +18,6 @@ body {
     min-height: 100vh;
 }
 
-/* Header */
 header {
     background-color: var(--mor);
     color: var(--blanco);
@@ -27,7 +25,6 @@ header {
     padding: 15px;
 }
 
-/* Footer */
 footer {
     background-color: var(--mor);
     color: var(--blanco);
@@ -36,7 +33,6 @@ footer {
     margin-top: auto;
 }
 
-/* Contenedor del formulario */
 .form-container {
     flex: 1;
     display: flex;
@@ -60,7 +56,7 @@ h2 {
     margin-bottom: 15px;
 }
 
-/* Estilos para los mensajes de error */
+/* error */
 .error {
     background-color: var(--blanco);
     color: var(--mor);

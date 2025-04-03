@@ -1,18 +1,29 @@
-<?php include 'header.php'; ?>
 <?php
+include 'header.php';
 include 'conexion.php';
 session_start();
 
-// Verificar si el usuario está autenticado
-if (!isset($_SESSION['usuario_id'])) {
-    header("Location: login.php");
-    exit();
+$usuario_id = $_SESSION['usuario_id'];  
+
+$sql_proveedor = "SELECT id FROM proveedores WHERE usuario_id = ?";
+$stmt_proveedor = mysqli_prepare($conn, $sql_proveedor);
+
+if ($stmt_proveedor) {
+    mysqli_stmt_bind_param($stmt_proveedor, "i", $usuario_id);
+    mysqli_stmt_execute($stmt_proveedor);
+    mysqli_stmt_store_result($stmt_proveedor);
+
+    if (mysqli_stmt_num_rows($stmt_proveedor) > 0) {
+        header("Location: editar_proveedor.php"); 
+        exit();
+    }
+    
+    mysqli_stmt_close($stmt_proveedor);
 }
 
 $mensaje = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $usuario_id = $_SESSION['usuario_id']; // ID del usuario autenticado
     $nombre_representante = trim($_POST['nombre_representante']);
     $nombre_comercial = trim($_POST['nombre_comercial']);
     $razon_social = trim($_POST['razon_social']);
@@ -21,30 +32,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $direccion = trim($_POST['direccion']);
     $giro_economico = trim($_POST['giro_economico']);
 
-    // Validación: Verificar que todos los campos estén llenos
     if (empty($nombre_representante) || empty($nombre_comercial) || empty($razon_social) || empty($telefono) || empty($correo) || empty($direccion) || empty($giro_economico)) {
         $mensaje = '<p class="error">⚠️ Todos los campos son obligatorios.</p>';
     } else {
-        // Insertar en la base de datos
-        $sql = "INSERT INTO proveedores (usuario_id, nombre_representante, nombre_comercial, razon_social, telefono, correo, direccion, giro_economico) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt = mysqli_prepare($conn, $sql);
+        $sql_insert = "INSERT INTO proveedores (usuario_id, nombre_representante, nombre_comercial, razon_social, telefono, correo, direccion, giro_economico) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt_insert = mysqli_prepare($conn, $sql_insert);
 
-        if ($stmt) {
-            mysqli_stmt_bind_param($stmt, "isssssss", $usuario_id, $nombre_representante, $nombre_comercial, $razon_social, $telefono, $correo, $direccion, $giro_economico);
-
-            if (mysqli_stmt_execute($stmt)) {
-                // Obtener el ID del proveedor recién registrado
-                $proveedor_id = mysqli_insert_id($conn);
-                
-                // Redirigir a la edición del proveedor
-                header("Location: editar_proveedor.php?id=" . $proveedor_id);
-                exit();
+        if ($stmt_insert) {
+            mysqli_stmt_bind_param($stmt_insert, "issssss", $usuario_id, $nombre_representante, $nombre_comercial, $razon_social, $telefono, $correo, $direccion, $giro_economico);
+            
+            if (mysqli_stmt_execute($stmt_insert)) {
+                $mensaje = '<p class="success">✅ Proveedor registrado correctamente.</p>';
             } else {
-                $mensaje = '<p class="error">❌ Error al registrar el proveedor.</p>';
+                $mensaje = '<p class="error">❌ Error al registrar el proveedor: ' . mysqli_stmt_error($stmt_insert) . '</p>';
             }
 
-            mysqli_stmt_close($stmt);
+            mysqli_stmt_close($stmt_insert);
         } else {
             $mensaje = '<p class="error">❌ Error en la consulta.</p>';
         }
@@ -57,8 +60,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Proveedores</title>
-    <link rel="stylesheet" href="css/style5.css"> <!-- Mantiene el mismo estilo -->
+    <title>Registro de Proveedor</title>
+    <link rel="stylesheet" href="css/style3.css">
 </head>
 <body>
     <div class="form-container">
@@ -67,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php echo $mensaje; ?>
             <form method="post">
                 <div class="form-group">
-                    <label>Nombre del Representante Legal:</label>
+                    <label>Nombre del Representante:</label>
                     <input type="text" name="nombre_representante" required>
                 </div>
                 <div class="form-group">
@@ -80,10 +83,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="form-group">
                     <label>Teléfono:</label>
-                    <input type="tel" name="telefono" required>
+                    <input type="text" name="telefono" required>
                 </div>
                 <div class="form-group">
-                    <label>Correo Electrónico:</label>
+                    <label>Correo:</label>
                     <input type="email" name="correo" required>
                 </div>
                 <div class="form-group">
@@ -96,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <button type="submit" class="btn">Registrar Proveedor</button>
             </form>
-            <a href="logout.php" class="volver">Cerrar Sesión</a>
+            <a href="index2.php" class="volver">Volver</a>
         </div>
     </div>
 </body>

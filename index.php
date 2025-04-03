@@ -80,12 +80,12 @@
                 <p><strong>Dirección:</strong> Palacio Municipal S/N, Colonia Centro, Atlacomulco, Estado de México, C.P. 50450</p>
             </div>
             <ul class="icon-redes">
-                <li>
-                    <a href="https://www.facebook.com/AyuntamientoDeAtlacomulco" target="_blank" rel="noopener noreferrer">
-                        <ion-icon name="logo-facebook"></ion-icon>
-                    </a>
-                </li>
-            </ul>
+    <li>
+        <a href="https://www.facebook.com/AyuntamientoDeAtlacomulco" target="_blank" rel="noopener noreferrer">
+            <ion-icon name="logo-facebook"></ion-icon>
+        </a>
+    </li>
+</ul>
         </div>
         <div class="footer-bottom">
             <p>Sitio a cargo del Departamento de Tecnologías de la información. Ayuntamiento de Atlacomulco 2023</p>
