@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($stmt) {
                 mysqli_stmt_bind_param($stmt, "sss", $name, $correo, $password);
                 if (mysqli_stmt_execute($stmt)) {
+                    
                     header("Location: registro_proveedores.php");
                     exit();
                 } else {

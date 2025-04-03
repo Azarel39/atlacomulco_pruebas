@@ -1,10 +1,18 @@
 <?php
 include 'header.php';
 include 'conexion.php';
+
 session_start();
+
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: login.php");
+    exit();
+}
 
 $usuario_id = $_SESSION['usuario_id'];  
 
+// Verificar si el proveedor ya está registrado
 $sql_proveedor = "SELECT id FROM proveedores WHERE usuario_id = ?";
 $stmt_proveedor = mysqli_prepare($conn, $sql_proveedor);
 
@@ -23,6 +31,7 @@ if ($stmt_proveedor) {
 
 $mensaje = "";
 
+// Verificar si se envió el formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre_representante = trim($_POST['nombre_representante']);
     $nombre_comercial = trim($_POST['nombre_comercial']);
@@ -35,11 +44,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($nombre_representante) || empty($nombre_comercial) || empty($razon_social) || empty($telefono) || empty($correo) || empty($direccion) || empty($giro_economico)) {
         $mensaje = '<p class="error">⚠️ Todos los campos son obligatorios.</p>';
     } else {
+        // Insertar en la base de datos
         $sql_insert = "INSERT INTO proveedores (usuario_id, nombre_representante, nombre_comercial, razon_social, telefono, correo, direccion, giro_economico) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt_insert = mysqli_prepare($conn, $sql_insert);
 
         if ($stmt_insert) {
-            mysqli_stmt_bind_param($stmt_insert, "issssss", $usuario_id, $nombre_representante, $nombre_comercial, $razon_social, $telefono, $correo, $direccion, $giro_economico);
+            mysqli_stmt_bind_param($stmt_insert, "isssssss", $usuario_id, $nombre_representante, $nombre_comercial, $razon_social, $telefono, $correo, $direccion, $giro_economico);
             
             if (mysqli_stmt_execute($stmt_insert)) {
                 $mensaje = '<p class="success">✅ Proveedor registrado correctamente.</p>';
